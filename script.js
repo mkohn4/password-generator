@@ -1,4 +1,14 @@
 // Assignment code here
+//declare global variables
+/*
+var passwordLength = 1;
+var confirm = {
+  lower: true,
+  upper: true,
+  numeric: true,
+  special: true
+};
+*/
 
 
 // Get references to the #generate element
@@ -13,9 +23,21 @@ function writePassword() {
 
 }
 
+var passwordLength = 1;
+var confirmLower = true;
+var confirmUpper = true;
+var confirmNumeric = true;
+var confirmSpecial = true;
+
 function generatePassword() {
   
   getUserOptions();
+  console.log(passwordLength);
+  console.log(confirmLower);
+  console.log(confirmUpper);
+  console.log(confirmNumeric);
+  console.log(confirmSpecial);
+
   /*
 PseudoCode
 
@@ -33,7 +55,7 @@ return;
 function getUserOptions(){
   //- When button is clicked generate window.prompt
   //- ask length
-  var passwordLength = window.prompt('How long would you like for your password to be? Please choose a number between 8 and 128');
+  passwordLength = window.prompt('How long would you like for your password to be? Please choose a number between 8 and 128');
   //confirm a number is chosen
   if (isNaN(passwordLength)) {
     window.confirm('Oops! You didnt choose a number.  Please Try again');
@@ -48,16 +70,16 @@ function getUserOptions(){
   //- user choose to include lowercase, uppercase, numeric, and/or special characters
   function passType() {
       //confirm if user wants lower
-      var confirmLower = window.confirm('Would you like to include lowercase letters?');
+      confirmLower = window.confirm('Would you like to include lowercase letters?');
       console.log(confirmLower);
       //confirm if user wants upper
-      var confirmUpper = window.confirm('Would you like to include UPPERCASE letters?');
+      confirmUpper = window.confirm('Would you like to include UPPERCASE letters?');
       console.log(confirmUpper);
       //confirm if user wants numeric
-      var confirmNumeric = window.confirm('Would you like to include numeric values?');
+      confirmNumeric = window.confirm('Would you like to include numeric values?');
       console.log(confirmNumeric);
       //confirm if user wants special character
-      var confirmSpecial = window.confirm('Would you like to include special characters?');
+      confirmSpecial = window.confirm('Would you like to include special characters?');
       console.log(confirmSpecial);
       //- validate at least one of above is selected
       if (confirmLower === false && confirmUpper === false && confirmNumeric === false && confirmSpecial === false ) {
@@ -70,7 +92,7 @@ function getUserOptions(){
       
 }
 
-getUserOptions();
+generatePassword();
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);

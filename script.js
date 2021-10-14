@@ -1,15 +1,98 @@
 // Assignment code here
 //declare global variables
-/*
 var passwordLength = 1;
-var confirm = {
-  lower: true,
-  upper: true,
-  numeric: true,
-  special: true
-};
-*/
+var confirmLower = true;
+var confirmUpper = true;
+var confirmNumeric = true;
+var confirmSpecial = true;
+var passwordArray = [];
 
+// Array of special characters to be included in password
+var specialCharacters = [
+  '@',
+  '%',
+  '+',
+  '\\',
+  '/',
+  "'",
+  '!',
+  '#',
+  '$',
+  '^',
+  '?',
+  ':',
+  ',',
+  ')',
+  '(',
+  '}',
+  '{',
+  ']',
+  '[',
+  '~',
+  '-',
+  '_',
+  '.'
+];
+// Array of numeric characters to be included in password
+var numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+// Array of lowercase characters to be included in password
+var lowerCasedCharacters = [
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z'
+];
+// Array of uppercase characters to be included in password
+var upperCasedCharacters = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z'
+];
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -23,12 +106,6 @@ function writePassword() {
 
 }
 
-var passwordLength = 1;
-var confirmLower = true;
-var confirmUpper = true;
-var confirmNumeric = true;
-var confirmSpecial = true;
-
 function generatePassword() {
   
   getUserOptions();
@@ -37,20 +114,23 @@ function generatePassword() {
   console.log(confirmUpper);
   console.log(confirmNumeric);
   console.log(confirmSpecial);
+  console.log(passwordArray);
 
-  /*
-PseudoCode
-
-  - generate password based on criteria
-  - check if upper
-    - if upper, add to password a random char from the upper array
-  - check if lower
-    - if lower, add to password a random char from the lower array
-  - display password on page
-  */
-return;
-  
-}
+//declare password as a local variable in generatePassword function
+var password = '';
+  //loop through a list of characters, choose a character, add it to the string, until passwordLength value achieved
+  for (i=1; i <= passwordLength; i++) {
+    console.log(i);
+    //if confirmLower = true add a character from lower case array to function output
+      //generate random number between 1-26
+      var value=Math.floor(Math.random() * passwordArray.length);
+      //choose this value from array of characters
+      //store this value onto itself
+      password = password.concat(passwordArray[value]);
+      console.log(password);
+  };
+  return password;
+};
 
 function getUserOptions(){
   //- When button is clicked generate window.prompt
@@ -72,15 +152,31 @@ function getUserOptions(){
       //confirm if user wants lower
       confirmLower = window.confirm('Would you like to include lowercase letters?');
       console.log(confirmLower);
+      //if user confirms lowercase then create new array and add lowercase characters to it
+      if (confirmLower === true) {
+        passwordArray = passwordArray.concat(lowerCasedCharacters);
+      }
       //confirm if user wants upper
       confirmUpper = window.confirm('Would you like to include UPPERCASE letters?');
       console.log(confirmUpper);
+      //if user confirms uppercase then add to array and add uppercase characters to it
+      if (confirmUpper === true) {
+        passwordArray = passwordArray.concat(upperCasedCharacters);
+      }
       //confirm if user wants numeric
       confirmNumeric = window.confirm('Would you like to include numeric values?');
       console.log(confirmNumeric);
+      //if user confirms numeric then add to array and add numeric characters to it
+      if (confirmNumeric === true) {
+        passwordArray = passwordArray.concat(numericCharacters);
+      }
       //confirm if user wants special character
       confirmSpecial = window.confirm('Would you like to include special characters?');
       console.log(confirmSpecial);
+      //if user confirms special characters then create new array and add special characters to it
+      if (confirmSpecial === true) {
+        passwordArray = passwordArray.concat(specialCharacters);
+      }
       //- validate at least one of above is selected
       if (confirmLower === false && confirmUpper === false && confirmNumeric === false && confirmSpecial === false ) {
         window.confirm('Oops! Looks like you didnt select any values.  Please Try again!');
@@ -91,8 +187,6 @@ function getUserOptions(){
   passType();
       
 }
-
-generatePassword();
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
